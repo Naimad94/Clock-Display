@@ -14,6 +14,7 @@ public class NumberDisplay
 {
     private int limit;
     private int value;
+    private String time;
 
     /**
      * Constructor for objects of class NumberDisplay.
@@ -40,10 +41,12 @@ public class NumberDisplay
      */
     public String getDisplayValue()
     {
-        if(value < 10) {
+        if(value < 10) 
+        {
             return "0" + value;
         }
-        else {
+        else 
+        {
             return "" + value;
         }
     }
@@ -54,7 +57,8 @@ public class NumberDisplay
      */
     public void setValue(int replacementValue)
     {
-        if((replacementValue >= 0) && (replacementValue < limit)) {
+        if((replacementValue >= 0) && (replacementValue < limit)) 
+        {
             value = replacementValue;
         }
     }
