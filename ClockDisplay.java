@@ -84,6 +84,11 @@ public class ClockDisplay
             int hour = hours.getValue();
             String suffix;
             
+            if((hour > 0) && (hour < 25))
+            {
+                hour = hours.getValue();
+            }
+      
             if(hour >= 12)
             {
                 suffix = "PM";
@@ -92,7 +97,18 @@ public class ClockDisplay
             {
                 suffix = "AM";
             }
-            displayString = hours.getDisplayValue() + ":" + 
+            
+            if(hour > 12)
+            {
+                hour = hour - 12;
+            }
+            
+            if(hour == 0)
+            {
+                hour = 12;
+            }
+           
+            displayString = hour + ":" + 
                         minutes.getDisplayValue() + " " + suffix;
         }
     }
