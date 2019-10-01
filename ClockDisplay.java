@@ -1,4 +1,4 @@
-
+ 
 /**
  * The ClockDisplay class implements a digital clock display for a
  * European-style 24 hour clock. The clock shows hours and minutes. The 
@@ -39,6 +39,7 @@ public class ClockDisplay
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
         setTime(hour, minute);
+        updateDisplay();
     }
 
     /**
@@ -75,41 +76,34 @@ public class ClockDisplay
         return displayString;
     }
     
+    private  void updateDisplayMeriadian()
+    {
+        displayString = hours.getDisplayValue() + ":" + minutes.getDisplayValue();
+    }
+    
     /**
      * Update the internal string that represents the display.
      */
     private void updateDisplay()
     {
         {
-            int hour = hours.getValue();
-            String suffix;
-            
-            if((hour > 0) && (hour < 25))
+            if(hours.getValue() < 12)
             {
-                hour = hours.getValue();
+                displayString = hours.getDisplayValue() + ":" + minutes.getDisplayValue() + " AM";
             }
-      
-            if(hour >= 12)
+            else if(hours.getValue() > 12 && hours.getValue() < 24)
             {
-                suffix = "PM";
+                displayString = (hours.getValue() - 12) + ":" + minutes.getDisplayValue() + " PM";
+            }
+            else if(hours.getValue() ==0)
+            {
+                displayString = hours.getDisplayValue() + ":" + minutes.getDisplayValue() + " AM";
             }
             else
             {
-                suffix = "AM";
+                hours.setValue(12);
+                 displayString = hours.getDisplayValue() + ":" + minutes.getDisplayValue() + " PM";
             }
-            
-            if(hour > 12)
-            {
-                hour = hour - 12;
-            }
-            
-            if(hour == 0)
-            {
-                hour = 12;
-            }
-           
-            displayString = hour + ":" + 
-                        minutes.getDisplayValue() + " " + suffix;
         }
     }
 }
